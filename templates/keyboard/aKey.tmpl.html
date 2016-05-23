@@ -1,0 +1,30 @@
+<li class="{{keyClass}}" ng-class="{clicked: clicked}" ng-dblclick="toggleClick()">
+
+
+  <div class="chars">
+    <span ng-repeat="(mod, char) in charTable" class="{{mod}}" ng-if="char">
+      {{char}}
+    </span>
+  </div>
+
+  <div class="explains">
+    <span ng-repeat="(mod, explain) in explainTable" class="explain {{mod}}">
+      {{explain}}
+    </span>
+  </div>
+
+  <div class="edit">
+    <div class="modificateur">
+        <label><input type="checkbox" ng-model="isModifier"></label>
+        <textarea ng-if="isModifier" ng-model="modifierName" placeholder="Nom du modificateur (nom de la touche par défaut)"></textarea>
+    </div>
+
+    <ul class="texts">
+      <li class="textModifContainer" ng-repeat="(id,name) in $parent.currentKeyboard.keyboard_keys.modificators">
+       <span ng-if="clicked">{{name}}</span>  <textarea type="text" ng-model="keyText[id]" placeholder="Texte pour le modificateur [{{id}}]"></textarea>
+      </li>
+      <li><textarea type="text" ng-model="keyText['default']" placeholder="Texte de base"></textarea></li>
+    </ul>
+  </div>
+
+</li>

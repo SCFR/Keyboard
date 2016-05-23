@@ -1,0 +1,117 @@
+<div id="keyboardContainer">
+
+  <keyboard-title-selector></keyboard-title-selector>
+
+  <pre>
+    {{currentKeyboard.keyboard_keys | json}}
+  </pre>
+
+    <ul id="keyboard">
+        <a-key key-class="symbol" char="²"></a-key>
+        <a-key key-class="symbol" char="&" maj-char="1"></a-key>
+        <a-key key-class="symbol" char="é" maj-char="2"  alt-gr-char="~"></a-key>
+        <a-key key-class="symbol" char="''" maj-char="3" alt-gr-char="#"></a-key>
+        <a-key key-class="symbol" char="'" maj-char="4"  alt-gr-char="{"></a-key>
+        <a-key key-class="symbol" char="(" maj-char="5"  alt-gr-char="["></a-key>
+        <a-key key-class="symbol" char="-" maj-char="6"  alt-gr-char="|"></a-key>
+        <a-key key-class="symbol" char="è" maj-char="7"  alt-gr-char="`"></a-key>
+        <a-key key-class="symbol" char="_" maj-char="8"  alt-gr-char="\"></a-key>
+        <a-key key-class="symbol" char="ç" maj-char="9"  alt-gr-char="^"></a-key>
+        <a-key key-class="symbol" char="à" maj-char="0"  alt-gr-char="@"></a-key>
+        <a-key key-class="symbol" char=")" maj-char="°"  alt-gr-char="]"></a-key>
+        <a-key key-class="symbol" char="=" maj-char="+"  alt-gr-char="}"></a-key>
+        <a-key key-class="delete lastitem" char="delete"></a-key>
+        <a-key key-class="tab break" char="TAB"></a-key>
+        <a-key key-class="letter" char="a"></a-key>
+        <a-key key-class="letter" char="z"></a-key>
+        <a-key key-class="letter" char="e"></a-key>
+        <a-key key-class="letter" char="r"></a-key>
+        <a-key key-class="letter" char="t"></a-key>
+        <a-key key-class="letter" char="y"></a-key>
+        <a-key key-class="letter" char="u"></a-key>
+        <a-key key-class="letter" char="i"></a-key>
+        <a-key key-class="letter" char="o"></a-key>
+        <a-key key-class="letter" char="p"></a-key>
+        <a-key key-class="symbol" char="^" maj-char="¨"></a-key>
+        <a-key key-class="symbol" char="$" maj-char="£" alt-gr-char="¤"></a-key>
+        <a-key key-class="return lastitem" char="return"></a-key>
+        <a-key key-class="capslock break" char="Caps Lock"></a-key>
+
+
+        <a-key key-class="letter" char="q"></a-key>
+        <a-key key-class="letter" char="s"></a-key>
+        <a-key key-class="letter" char="d"></a-key>
+        <a-key key-class="letter" char="f"></a-key>
+        <a-key key-class="letter" char="g"></a-key>
+        <a-key key-class="letter" char="h"></a-key>
+        <a-key key-class="letter" char="j"></a-key>
+        <a-key key-class="letter" char="k"></a-key>
+        <a-key key-class="letter" char="l"></a-key>
+        <a-key key-class="letter" char="m"></a-key>
+        <a-key key-class="symbol" char="ù" maj-char="%"></a-key>
+        <a-key key-class="symbol" char="*" maj-char="µ"></a-key>
+
+        <a-key key-class="left-shift break" char="shift"></a-key>
+        <a-key key-class="symbol" char="<" maj-char=">"></a-key>
+        <a-key key-class="letter" char="w"></a-key>
+        <a-key key-class="letter" char="x"></a-key>
+        <a-key key-class="letter" char="c"></a-key>
+        <a-key key-class="letter" char="v"></a-key>
+        <a-key key-class="letter" char="b"></a-key>
+        <a-key key-class="letter" char="n"></a-key>
+        <a-key key-class="symbol" char=","></a-key>
+        <a-key key-class="symbol" char=";"></a-key>
+        <a-key key-class="symbol" char=":"></a-key>
+        <a-key key-class="symbol" char="!"></a-key>
+
+        <li class="right-shift lastitem">shift</li>
+
+        <li class="symbol ctrlLeft break">Ctrl</li>
+        <li class="empty"></li>
+        <li class="symbol altLeft">Alt</li>
+        <li class="space">&nbsp;</li>
+        <li class="symbol altGr">Alt GR</li>
+        <li class="empty"></li>
+        <li class="symbol ctrlRight lastitem">Ctrl</li>
+    </ul>
+    <ul id="special">
+      <li class="symbol">INS</li>
+      <li class="symbol">Home</li>
+      <li class="symbol lastitem pgUp ">Page Up</li>
+      <li class="symbol break">SUPRR</li>
+      <li class="symbol">FIN</li>
+      <li class="symbol lastitem pgDwn">PageDown</li>
+
+      <li class="empty break"></li>
+      <li class="empty"></li>
+      <li class="empty lastitem"></li>
+
+      <li class="empty break"></li>
+      <li class="symbol">top</li>
+      <li class="empty lastitem"></li>
+      <li class="symbol break">left</li>
+      <li class="symbol">bottom</li>
+      <li class="symbol lastitem">right</li>
+    </ul>
+
+
+    <ul id="numpad">
+      <li class="symbol">VERR Num</li>
+      <li class="symbol">/</li>
+      <li class="symbol">*</li>
+      <li class="symbol lastitem">-</li>
+      <li class="num break">7</li>
+      <li class="num">8</li>
+      <li class="num">9</li>
+      <li class="num break">4</li>
+      <li class="num">5</li>
+      <li class="num lastitem">6</li>
+      <li class="symbol plus lastitem">+</li>
+      <li class="num break">1</li>
+      <li class="num">2</li>
+      <li class="num lastitem">3</li>
+      <li class="num zero break">0</li>
+      <li class="symbol">.</li>
+      <li class="symbol entrNumpad lastitem">ENTR</li>
+    </ul>
+  </div>

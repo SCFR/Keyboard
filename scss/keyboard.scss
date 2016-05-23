@@ -1,0 +1,239 @@
+$keyHeight: 110px;
+$keyWidth: 120px;
+$borderColorHover: #e5e5e5;
+$keyMargin: 5px;
+
+#KeyboardHeader {
+  background-image:url(http://www.starcitizen.fr/wp-content/uploads/2016/01/landscape-1448027193-mark-hamill.png);
+  height: 350px;
+  .content {
+    padding-left:0px;
+    h1 {
+      font-weight: bold;
+      font-family:"Electrolize";
+    }
+  }
+}
+
+#keyboardContainer > ul {
+margin: 20px 10px;
+padding: 0;
+list-style: none;
+float:left;
+position:relative;
+&#keyboard {
+  min-width: 15*$keyWidth + 16*$keyMargin;
+}
+&#special {
+  min-width: 3*$keyWidth + 4*$keyMargin;
+}
+&#numpad {
+  min-width: 4*$keyWidth + 5*$keyMargin;
+}
+ >  li {
+  float: left;
+  margin: 0 $keyMargin $keyMargin 0;
+  width: $keyWidth;
+  height: $keyHeight;
+  line-height: 40px;
+  text-align: center;
+  overflow:hidden;
+  background: #fff;
+  background: #364A57;
+  border: 1px solid #6490AD;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  &:not(.clicked) {
+    position:relative;
+    > .edit {
+      > .modificateur {
+        input[type="checkbox"] {
+          display:none;
+        }
+        textarea {
+          overflow: hidden;
+          width: 100%;
+          background: none;
+          border: none;
+          position: absolute;
+          top: -11px;
+          padding: 0px;
+          height: 27px;
+          left: 3px;
+          font-size: 8px !important;
+          padding-top: 0px;
+        }
+      }
+      > .texts {
+        list-style: none;
+        padding-left:0px;
+        position: absolute;
+        bottom: 4px;
+        > li {
+          height: 1em;
+          overflow: hidden;
+          width: 100%;
+          textarea {
+            background: transparent;
+            border: 0px;
+            font-size: 10px;
+            line-height: 1em;
+            padding: 0px;
+            height: 2em;
+            overflow: hidden;
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+  &.clicked {
+    //transform:scale(3);
+    width:5*$keyWidth;
+    height:5*$keyHeight;
+    z-index:999;
+    position:absolute;
+
+    > .edit {
+      text-align: left;
+      textarea {
+        width: 100%;
+        background: #2E3F4A;
+        padding: 5px 10px;
+        border: 1px solid rgba(255,255,255,0.13);
+        font-size: 15px;
+        line-height: 1em;
+        height: 3em;
+      }
+      .modificateur {
+        margin-bottom: 20px;
+        label {
+          margin-left: 10px;
+          input[type="checkbox"] {
+            margin-right:5px;
+          }
+        }
+
+      }
+      .texts {
+        position: absolute;
+        bottom: 0px;
+        width: 100%;
+        max-height: 280px;
+        .textModifContainer  {
+          position:relative;
+          span {
+            position: absolute;
+            font-size: 13px;
+            background: rgba(0, 0, 0, 0.28);
+            height: 21px;
+            width: 25px;
+            right: 2px;
+            top: 31px;
+            line-height: 1em;
+            padding: 4px;
+          }
+        }
+      }
+    }
+  }
+
+  > .chars {
+    width:35px;
+    height:25px;
+    margin-top:10px;
+    margin-right: 10px;
+    float:right;
+    line-height: 1em;
+    text-align:center;
+    > span {
+      float:left;
+      width:50%;
+      &:first-child {
+        clear:right;
+        width:100%;
+      }
+    }
+  }
+
+
+  &:hover {
+    border-color: $borderColorHover;
+    cursor: pointer;
+  }
+  &.empty {
+    background:transparent;
+    pointer-events: none;
+    border:none;
+  }
+  &.symbol {
+  }
+  &.break {
+  clear: left;
+  }
+
+    &.tab,   &.left-shift{
+      width: 1.5*$keyWidth;
+    }
+    &.capslock, &.delete {
+      width: 2*$keyWidth;
+    }
+
+    &.return {
+      width:  1.5*$keyWidth;
+      border-radius: 5px 5px 0px 5px;
+      position:relative;
+      overflow:visible;
+      &:hover:after {
+        border:1px solid $borderColorHover;
+        border-top:0px;
+      }
+      &:after {
+        display: block;
+        content: '';
+        width: $keyWidth;
+        height: $keyHeight+8px;
+        position: absolute;
+        bottom: - ($keyHeight +8px);
+        right: -1px;
+        background: #364A57;
+        border: 1px solid #6490AD;
+        border-top: 0px;
+        border-radius: 0px 0px 5px 5px;
+      }
+    }
+
+    &.right-shift {
+      width: 2.5*$keyWidth + $keyMargin;
+      margin-right:0px;
+    }
+    &.lastitem {
+      margin-right: 0;
+    }
+    &.uppercase {
+    text-transform: uppercase;
+    }
+    &.space {
+      width: 5*$keyWidth;
+    }
+    &.ctrlLeft, &.altLeft, &.altGr, &.ctrlRight {
+      width: 1.5*$keyWidth;
+    }
+    &.on {
+    display: none;
+    }
+    &.plus {
+      height: $keyHeight*2 + $keyMargin ;
+      margin-top: - ($keyHeight + $keyMargin);
+      margin-left: 5px;
+    }
+    &.zero {
+      width: $keyWidth*2 + 5;
+    }
+
+    &.entrNumpad {
+      height: $keyHeight*2 + $keyMargin ;
+      margin-top: - ($keyHeight + $keyMargin);
+    }
+  }
+}
