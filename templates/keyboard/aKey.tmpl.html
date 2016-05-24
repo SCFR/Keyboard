@@ -1,29 +1,36 @@
-<li class="{{keyClass}}" ng-class="{clicked: clicked}" ng-dblclick="toggleClick()">
+<li class="{{keyClass}}" ng-class="{clicked: clicked, unused: !isUsed}" ng-dblclick="toggleClick()">
 
+  <div class="top">
 
-  <div class="chars">
-    <span ng-repeat="(mod, char) in charTable" class="{{mod}}" ng-if="char">
-      {{char}}
-    </span>
+    <div class="modifierName {{modifierName}}" ng-if="isModifier">{{modifierName}}</div>
+
+    <div class="chars">
+      <span ng-repeat="(mod, char) in charTable" class="{{mod}}" ng-if="char">
+        {{char}}
+      </span>
+    </div>
+
+    <div class="clear"></div>
+
   </div>
 
   <div class="explains">
-    <span ng-repeat="(mod, explain) in explainTable" class="explain {{mod}}">
+    <span ng-repeat="(mod, explain) in keyText" class="explain {{mod}}" ng-if="mod!=0">
       {{explain}}
     </span>
   </div>
 
   <div class="edit">
     <div class="modificateur">
-        <label><input type="checkbox" ng-model="isModifier"></label>
-        <textarea ng-if="isModifier" ng-model="modifierName" placeholder="Nom du modificateur (nom de la touche par défaut)"></textarea>
+        <label><input type="checkbox" ng-model="isModifier" ng-show="editMod" ng-disabled="!editMod"></label>
+        <textarea ng-model="modifierName" ng-show="isModifier" ng-disabled="!editMod" placeholder="Nom du modificateur (nom de la touche par défaut)"></textarea>
     </div>
 
     <ul class="texts">
-      <li class="textModifContainer" ng-repeat="(id,name) in $parent.currentKeyboard.keyboard_keys.modificators">
-       <span ng-if="clicked">{{name}}</span>  <textarea type="text" ng-model="keyText[id]" placeholder="Texte pour le modificateur [{{id}}]"></textarea>
+      <li class="textModifContainer" ng-repeat="(id,name) in $parent.currentKeyboard.keyboard_keys.modificators" ng-if="id != 0">
+       <span ng-if="clicked">{{name}}</span>  <textarea ng-disabled="!editMod" type="text" ng-model="keyText[id]" placeholder="Texte pour le modificateur [{{id}}]"></textarea>
       </li>
-      <li><textarea type="text" ng-model="keyText['default']" placeholder="Texte de base"></textarea></li>
+      <li><textarea type="text" ng-model="keyText['default']"  ng-disabled="!editMod" placeholder="Texte de base"></textarea></li>
     </ul>
   </div>
 
