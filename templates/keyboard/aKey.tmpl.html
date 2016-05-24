@@ -2,10 +2,10 @@
 
   <div class="top">
 
-    <div class="modifierName {{modifierName}}" ng-if="isModifier">{{modifierName}}</div>
+    <div class="modifierName {{escapize(char)}}" ng-if="isModifier">{{modifierName}}</div>
 
     <div class="chars">
-      <span ng-repeat="(mod, char) in charTable" class="{{mod}}" ng-if="char">
+      <span ng-repeat="(mod, char) in charTable" class="" ng-if="char">
         {{char}}
       </span>
     </div>
@@ -15,7 +15,7 @@
   </div>
 
   <div class="explains">
-    <span ng-repeat="(mod, explain) in keyText" class="explain {{mod}}" ng-if="mod!=0">
+    <span ng-repeat="(mod, explain) in keyText" class="explain {{escapize(mod)}}" ng-if="mod!=0">
       {{explain}}
     </span>
   </div>
