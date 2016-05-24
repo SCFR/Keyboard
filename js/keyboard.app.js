@@ -140,7 +140,7 @@ app.controller('Keyboard.main', ["$scope", "SCFRKeyboardAPI", function ($scope, 
 
           if($scope.currentKeyboard.id > 0)
             delete $scope.selector.keyboards[$scope.oldVersion][$scope.oldName];
-            
+
           if(!$scope.selector.keyboards[$scope.newVersion])
             $scope.selector.keyboards[$scope.newVersion] = {};
 
@@ -211,6 +211,9 @@ app.controller('aSingleKey', ["$scope","$element","$timeout", function ($scope,e
   }
 
   init();
+  $scope.escapize = function(char) {
+    return "colorize_"+char.toLowerCase().replace(/\s/g, '');
+  }
 
   $scope.toggleClick = function() {
     $scope.clicked = !$scope.clicked;
@@ -253,15 +256,17 @@ app.controller('aSingleKey', ["$scope","$element","$timeout", function ($scope,e
       $timeout(function(){
 
         $(elem).css("top",pos.top - ( (zoomFactor/2) * keyHeight) ).css("left", pos.left - ( (zoomFactor/2) * keyWidth) );
-        $(elem).next().css("margin-left",6+keyWidth+"px");
+          $(elem).next(":not(.lastitem, .break)").css("margin-left",6+keyWidth+"px");
+        if($(elem).is(".break")) $(elem).next().css("clear","left");
         var dim = $(elem)[0].getBoundingClientRect();
+        console.log(dim);
         if(dim.left < 0) {
           var margin = -dim.left + 15;
           $(elem).css("margin-left",margin+"px");
           $(elem).css("margin-right","-"+(margin - 5)+"px");
         }
-        else if(dim.right < 0) {
-          var margin = -dim.right + 15;
+        else if(dim.right+dim.width > $(window).width()) {
+          var margin = ($(window).width() - (dim.right + dim.width)) - 15;
           $(elem).css("margin-right",margin+"px");
           $(elem).css("margin-left","-"+(margin - 5)+"px");
         }

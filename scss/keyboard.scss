@@ -115,7 +115,7 @@ position:relative;
         display: block;
         line-height: 1em;
         font-size: 9px;
-        text-align: justify;
+        text-align: left;
       }
     }
     > .edit {
@@ -229,9 +229,15 @@ position:relative;
 
     &.tab,   &.left-shift{
       width: 1.5*$keyWidth;
+      &.clicked {
+        width: 6*$keyWidth;
+      }
     }
     &.capslock, &.delete {
       width: 2*$keyWidth;
+      &.clicked {
+        width:5*$keyWidth !important;
+      }
     }
 
     &.return {
@@ -256,6 +262,16 @@ position:relative;
         border-top: 0px;
         border-radius: 0px 0px 5px 5px;
       }
+      &.clicked {
+        position:absolute;
+        width: $keyWidth*5;
+        height: ($keyHeight*3);
+        &:after {
+          width: $keyWidth*3.5;
+          bottom: -168px;
+          height: $keyHeight*2+8px;
+        }
+      }
     }
 
     &.right-shift {
@@ -270,9 +286,15 @@ position:relative;
     }
     &.space {
       width: 5*$keyWidth;
+      &.clicked {
+        width:8*$keyWidth;
+      }
     }
     &.ctrlLeft, &.altLeft, &.altGr, &.ctrlRight {
       width: 1.5*$keyWidth;
+      &.clicked {
+        width:6*$keyWidth;
+      }
     }
     &.on {
     display: none;
@@ -330,4 +352,18 @@ $duration: 1.4s;
    stroke-dashoffset: $offset;
    transform:rotate(450deg);
  }
+}
+
+.colorize_altgr {
+  color:#c22a3a;
+}
+
+.colorize_alt {
+  color:#f6941d;
+}
+.colorize_f3 {
+  color:#2280c2;
+}
+.colorize_ {
+  color:#91c846;
 }
