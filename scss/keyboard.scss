@@ -98,6 +98,7 @@ position:relative;
   line-height: 40px;
   text-align: center;
   overflow:hidden;
+  transition:width, height,transform 0.5s;
   background: #fff;
   background: #364A57;
   border: 1px solid #6490AD;
@@ -122,13 +123,20 @@ position:relative;
       display:none;
     }
   }
+  &.focused {
+    opacity: 1 !important;
+    transform: scale(1.1);
+    z-index: 999;
+  }
   &.clicked {
     //transform:scale(3);
     width:5*$keyWidth;
     height:5*$keyHeight;
     z-index:999;
     position:absolute;
-
+    > .explains {
+      display:none;
+    }
     > .edit {
       text-align: left;
       textarea {
@@ -277,6 +285,9 @@ position:relative;
     &.right-shift {
       width: 2.5*$keyWidth + $keyMargin;
       margin-right:0px;
+      &.clicked {
+        width:6*$keyWidth;
+      }
     }
     &.lastitem {
       margin-right: 0;
@@ -302,14 +313,25 @@ position:relative;
     &.plus {
       height: $keyHeight*2 + $keyMargin ;
       margin-top: - ($keyHeight + $keyMargin);
+      &.clicked {
+        width: $keyWidth*5;
+        height: $keyHeight*5;
+      }
     }
     &.zero {
       width: $keyWidth*2 + 5;
+      &.clicked {
+        width: $keyWidth*5;
+      }
     }
 
     &.entrNumpad {
       height: $keyHeight*2 + $keyMargin ;
       margin-top: - ($keyHeight + $keyMargin);
+      &.clicked {
+        width: $keyWidth*5;
+        height: $keyHeight*5;
+      }
     }
   }
 }
