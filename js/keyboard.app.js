@@ -12,7 +12,6 @@ app.service('SCFRKeyboardAPI', ['$http', function($http) {
 
     var url = APIPATH+"/wp-json/Keyboard/Edit/";
     var p   = $http.post(url, {keyboard: _keyboard}).then( function(data) {
-      console.log(data);
       return data.data;
     });
     return p;
@@ -21,7 +20,6 @@ app.service('SCFRKeyboardAPI', ['$http', function($http) {
   this.deleteKeyboard = function( _keyboard ) {
     var url = APIPATH+"/wp-json/Keyboard/Delete/";
     var p   = $http.post(url, {keyboard: _keyboard}).then( function(data) {
-      console.log(data);
       return data.data;
     });
     return p;
@@ -30,10 +28,11 @@ app.service('SCFRKeyboardAPI', ['$http', function($http) {
   return this;
 }]);
 
-app.controller('Keyboard.main', ["$scope", "SCFRKeyboardAPI", function ($scope, API) {
+app.controller('Keyboard.main', ["$scope", "SCFRKeyboardAPI","$document", function ($scope, API, $document) {
 
   $scope.selector = CURRENT_PAGE.model;
   $scope.isEditMod = false;
+  $scope.pressedLetter = false;
 
   selectKeyboard = function (keyboard) {
     $scope.currentKeyboard = angular.copy(keyboard);
@@ -139,10 +138,10 @@ app.controller('Keyboard.main', ["$scope", "SCFRKeyboardAPI", function ($scope, 
         API.editKeyboard($scope.currentKeyboard).then(function(data) {
 
           if($scope.currentKeyboard.id > 0)
-            delete $scope.selector.keyboards[$scope.oldVersion][$scope.oldName];
+          delete $scope.selector.keyboards[$scope.oldVersion][$scope.oldName];
 
           if(!$scope.selector.keyboards[$scope.newVersion])
-            $scope.selector.keyboards[$scope.newVersion] = {};
+          $scope.selector.keyboards[$scope.newVersion] = {};
 
           $scope.selector.keyboards[$scope.newVersion][$scope.newName] = $scope.currentKeyboard;
           selectKeyboard($scope.selector.keyboards[$scope.newVersion][$scope.newName]);
@@ -173,6 +172,73 @@ app.controller('Keyboard.main', ["$scope", "SCFRKeyboardAPI", function ($scope, 
 
   selectFirstKeyboard = function() {
     selectKeyboard($scope.selector.keyboards[Object.keys($scope.selector.keyboards)[0]][Object.keys($scope.selector.keyboards[Object.keys($scope.selector.keyboards)[0]])[0]]);
+  }
+
+  var prevE = null;
+  var ctrlCount = 0;
+  $document.keydown(function(e) {
+    if(!$scope.isEditMod) {
+
+      if(e.keyCode == prevE && !(prevE == 17 && ctrlCount < 2) ) {
+        return;
+      }
+      else
+      {
+        prevE = e.keyCode;
+        var c = null;
+        if (e.keyCode == 16) {
+          if (e.originalEvent.location == 1)
+          c = "Shift";
+          else
+          c = "ShiftR";
+        } else if (e.keyCode == 17) {
+          if(ctrlCount == 1) {
+            if (e.originalEvent.location == 1)
+            c = "Ctrl";
+            else
+            c = "CtrlR"
+          }
+          ctrlCount++;
+        } else if (e.keyCode == 18) {
+          ctrlCount = 0;
+          if (e.originalEvent.location == 1)
+          c = "Alt";
+          else
+          c = "Alt GR";
+          e.preventDefault(); //because ALT focusout the element
+        }
+        if(c) {
+          switchPressedLetters(c);
+        }
+      }
+    }
+  });
+  $document.keypress(function(e) {
+    if(!$scope.isEditMod) {
+      var c = String.fromCharCode(e.which);
+      switchPressedLetters(c);
+    }
+  });
+
+
+  $document.keyup(function(e) {
+    if(!$scope.isEditMod) {
+      resetPressedLetter();
+    }
+  });
+
+  resetPressedLetter = function() {
+    $scope.pressedLetter = false;
+    prevE = null;
+    ctrlCount = 0;
+    $scope.$broadcast("keyPressed", false);
+  }
+
+  switchPressedLetters = function(key) {
+    if ($scope.pressedLetter === false && key != $scope.pressedLetter) {
+      $scope.pressedLetter = key;
+      $scope.$broadcast("keyPressed", key);
+    }
   }
 
   selectFirstKeyboard();
@@ -256,10 +322,10 @@ app.controller('aSingleKey', ["$scope","$element","$timeout", function ($scope,e
       $timeout(function(){
 
         $(elem).css("top",pos.top - ( (zoomFactor/2) * keyHeight) ).css("left", pos.left - ( (zoomFactor/2) * keyWidth) );
-          $(elem).next(":not(.lastitem, .break)").css("margin-left",6+keyWidth+"px");
+        $(elem).next(":not(.lastitem, .break)").css("margin-left",6+keyWidth+"px");
+
         if($(elem).is(".break")) $(elem).next().css("clear","left");
         var dim = $(elem)[0].getBoundingClientRect();
-        console.log(dim);
         if(dim.left < 0) {
           var margin = -dim.left + 15;
           $(elem).css("margin-left",margin+"px");
@@ -267,8 +333,8 @@ app.controller('aSingleKey', ["$scope","$element","$timeout", function ($scope,e
         }
         else if(dim.right+dim.width > $(window).width()) {
           var margin = ($(window).width() - (dim.right + dim.width)) - 15;
-          $(elem).css("margin-right",margin+"px");
-          $(elem).css("margin-left","-"+(margin - 5)+"px");
+          //$(elem).css("margin-right",margin+"px");
+          //$(elem).css("margin-left",(-(margin - 5))+"px");
         }
       },0);
     }
@@ -290,6 +356,27 @@ app.controller('aSingleKey', ["$scope","$element","$timeout", function ($scope,e
     $scope.isModifier = modif.is;
     $scope.modifierName = angular.copy(modif.name);
     $scope.keyText = angular.copy($scope.$parent.getKey($scope.char));
+  });
+
+  $scope.$on("keyPressed", function(e, key) {
+    var focused = false;
+    if(key == false) {
+      focused = false;
+    }
+    else {
+      if(key == $scope.char) {
+        focused = true;
+      }
+      else {
+        if($scope.keyText[key] != null)
+        focused = true;
+      }
+    }
+
+    $timeout(function(){
+      $scope.focused = focused;
+    },0);
+
   });
 
 }]);
