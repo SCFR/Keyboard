@@ -31,7 +31,7 @@ class Keyboard {
     add_action( 'init', array(&$this->db,"setCurrentUser"));
   }
 
-  public function keyboard_page_template() {
+  public function keyboard_page_template( $page_template ) {
     if ( is_page( 'guide-des-touches-du-clavier' ) ) {
       $page_template = plugin_dir_path( __FILE__ ) . '../page/page-keyboard.php';
     }
