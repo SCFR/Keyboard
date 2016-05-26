@@ -189,15 +189,15 @@ app.controller('Keyboard.main', ["$scope", "SCFRKeyboardAPI","$document", functi
         var c = null;
         if (e.keyCode == 16) {
           if (e.originalEvent.location == 1)
-          c = "Shift";
+          c = "Maj";
           else
-          c = "ShiftR";
+          c = "Maj d";
         } else if (e.keyCode == 17) {
           if(ctrlCount == 1) {
             if (e.originalEvent.location == 1)
             c = "Ctrl";
             else
-            c = "CtrlR"
+            c = "Ctrl d"
           }
           ctrlCount++;
         } else if (e.keyCode == 18) {
@@ -207,6 +207,22 @@ app.controller('Keyboard.main', ["$scope", "SCFRKeyboardAPI","$document", functi
           else
           c = "Alt GR";
           e.preventDefault(); //because ALT focusout the element
+        }
+        else if(e.keyCode == 20) {
+          c = "Caps";
+          e.preventDefault();
+        }
+        else if(e.keyCode == 32) {
+          c = "Espace";
+          e.preventDefault();
+        }
+        else if(e.keyCode == 9) {
+          c = "Tab";
+          e.preventDefault();
+        }
+        else if(e.keyCode == 8) {
+          c = "Retour";
+          e.preventDefault();
         }
         if(c) {
           switchPressedLetters(c);
@@ -245,13 +261,10 @@ app.controller('Keyboard.main', ["$scope", "SCFRKeyboardAPI","$document", functi
     var keysdone=0;
   $scope.$on("doneFocusing", function doneFocusing() {
     keysdone++;
-    console.log(keysdone);
     if(keysdone == 111) {
-      console.log("done");
       $scope.$digest();
       keysdone=0
     }
-
   });
 
   selectFirstKeyboard();
