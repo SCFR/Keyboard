@@ -177,6 +177,7 @@ app.controller('Keyboard.main', ["$scope", "SCFRKeyboardAPI","$document", functi
 
   var prevE = null;
   var ctrlCount = 0;
+
   $document.keydown(function(e) {
     if(!$scope.isEditMod) {
 
@@ -236,8 +237,6 @@ app.controller('Keyboard.main', ["$scope", "SCFRKeyboardAPI","$document", functi
       switchPressedLetters(c);
     }
   });
-
-
   $document.keyup(function(e) {
     if(!$scope.isEditMod) {
       resetPressedLetter();
@@ -259,7 +258,7 @@ app.controller('Keyboard.main', ["$scope", "SCFRKeyboardAPI","$document", functi
   }
 
     var keysdone=0;
-  $scope.$on("doneFocusing", function doneFocusing() {
+  $scope.$on("doneUpadtingKey", function doneFocusing() {
     keysdone++;
     if(keysdone == 111) {
       $scope.$digest();
@@ -328,6 +327,7 @@ app.controller('aSingleKey', ["$scope","$element","$timeout", function ($scope,e
       });
       if(Object.keys(d).length > 0) {
         $scope.$emit("textChanged", $scope.char, d);
+        console.log("emited change");
         $scope.isUsed = true;
       }
       else $scope.isUsed = false;
@@ -373,15 +373,15 @@ app.controller('aSingleKey', ["$scope","$element","$timeout", function ($scope,e
 
   $scope.$on("newKeyboard",function() {
 
-    delete $scope.keyText;
-    $scope.modifierName = "";
-    $scope.isModifier = false;
-    $scope.isUsed = false;
+      delete $scope.keyText;
+      $scope.modifierName = "";
+      $scope.isModifier = false;
 
-    var modif = $scope.$parent.getKeyModifier($scope.char);
-    $scope.isModifier = modif.is;
-    $scope.modifierName = angular.copy(modif.name);
-    $scope.keyText = angular.copy($scope.$parent.getKey($scope.char));
+      var modif = $scope.$parent.getKeyModifier($scope.char);
+      $scope.isModifier = modif.is;
+      $scope.modifierName = angular.copy(modif.name);
+      $scope.keyText = angular.copy($scope.$parent.getKey($scope.char)) || {0:null};
+
   });
 
   $scope.$on("keyPressed", function KeyPressed(e, key) {
@@ -402,7 +402,7 @@ app.controller('aSingleKey', ["$scope","$element","$timeout", function ($scope,e
     $scope.clicked = false;
     $scope.focused = focused;
 
-    $scope.$emit("doneFocusing");
+    $scope.$emit("doneUpadtingKey");
   });
 
 }]);
