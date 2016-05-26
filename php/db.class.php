@@ -47,7 +47,7 @@ class db {
 
   public function userCanEdit() {
     $meta = get_user_meta($this->userId, "keyboards_can_manage", true);
-    if($meta === "on" || current_user_can('editor') || current_user_can('administrator'))
+    if($meta === "on" || user_can($this->userId, 'editor') || user_can($this->userId, 'administrator'))
       return true;
     else
       return false;
