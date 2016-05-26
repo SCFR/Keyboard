@@ -242,6 +242,18 @@ app.controller('Keyboard.main', ["$scope", "SCFRKeyboardAPI","$document", functi
     }
   }
 
+    var keysdone=0;
+  $scope.$on("doneFocusing", function doneFocusing() {
+    keysdone++;
+    console.log(keysdone);
+    if(keysdone == 111) {
+      console.log("done");
+      $scope.$digest();
+      keysdone=0
+    }
+
+  });
+
   selectFirstKeyboard();
 
 }]);
@@ -359,7 +371,7 @@ app.controller('aSingleKey', ["$scope","$element","$timeout", function ($scope,e
     $scope.keyText = angular.copy($scope.$parent.getKey($scope.char));
   });
 
-  $scope.$on("keyPressed", function(e, key) {
+  $scope.$on("keyPressed", function KeyPressed(e, key) {
     var focused = false;
     if(key == false) {
       focused = false;
@@ -374,11 +386,10 @@ app.controller('aSingleKey', ["$scope","$element","$timeout", function ($scope,e
       }
     }
 
-    $timeout(function(){
-      $scope.clicked = false;
-      $scope.focused = focused;
-    },0);
+    $scope.clicked = false;
+    $scope.focused = focused;
 
+    $scope.$emit("doneFocusing");
   });
 
 }]);
