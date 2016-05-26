@@ -22,6 +22,9 @@ $keyMargin: 5px;
     }
   }
 }
+#keyboardContainer {
+  text-align:center;
+}
 #keyboardContainer .spinner {
     width: 35px;
     float: left;
@@ -76,10 +79,10 @@ $keyMargin: 5px;
 
 
 #keyboardContainer > ul {
-margin: 20px 10px;
+margin: 20px 0px;
 padding: 0;
 list-style: none;
-float:left;
+display:inline-block;
 position:relative;
 &#keyboard {
   min-width: 15*$keyWidth + 16*$keyMargin;
@@ -127,6 +130,8 @@ position:relative;
   &.focused {
     opacity: 1 !important;
     transform: scale(1.1);
+    box-shadow: 0px 0px 10px black;
+    border: 1px solid #68A5CC;
     z-index: 999;
   }
   &.clicked {

@@ -98,6 +98,7 @@ app.controller('Keyboard.main', ["$scope", "SCFRKeyboardAPI","$document", functi
   $scope.copyKeyboard = function() {
     $scope.prevKeyboard = angular.copy($scope.currentKeyboard);
     $scope.currentKeyboard.id = 0;
+    $scope.newName = "";
     $scope.currentKeyboard.date_created = $scope.currentKeyboard.date_last_modified = null;
   }
 
@@ -374,6 +375,7 @@ app.controller('aSingleKey', ["$scope","$element","$timeout", function ($scope,e
     }
 
     $timeout(function(){
+      $scope.clicked = false;
       $scope.focused = focused;
     },0);
 
