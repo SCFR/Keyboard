@@ -225,6 +225,102 @@ app.controller('Keyboard.main', ["$scope", "SCFRKeyboardAPI","$document", functi
           c = "Retour";
           e.preventDefault();
         }
+        else if(e.keyCode == 13) {
+          c = "Entrée";
+          e.preventDefault();
+        }
+        else if(e.keyCode == 27) {
+          c = "Echap";
+          e.preventDefault();
+        }
+        else if(e.keyCode == 112) {
+          c = "F1";
+          e.preventDefault();
+        }
+        else if(e.keyCode == 113) {
+          c = "F2";
+          e.preventDefault();
+        }
+        else if(e.keyCode == 114) {
+          c = "F3";
+          e.preventDefault();
+        }
+        else if(e.keyCode == 115) {
+          c = "F4";
+          e.preventDefault();
+        }
+        else if(e.keyCode == 116) {
+          c = "F5";
+          e.preventDefault();
+        }
+        else if(e.keyCode == 117) {
+          c = "F6";
+          e.preventDefault();
+        }
+        else if(e.keyCode == 118) {
+          c = "F7";
+          e.preventDefault();
+        }
+        else if(e.keyCode == 119) {
+          c = "F8";
+          e.preventDefault();
+        }
+        else if(e.keyCode == 120) {
+          c = "F9";
+          e.preventDefault();
+        }
+        else if(e.keyCode == 121) {
+          c = "F10";
+          e.preventDefault();
+        }
+        else if(e.keyCode == 122) {
+          c = "F11";
+          e.preventDefault();
+        }
+        else if(e.keyCode == 123) {
+          c = "F12";
+          e.preventDefault();
+        }
+        else if(e.keyCode == 45) {
+          c = "Ins";
+          e.preventDefault();
+        }
+        else if(e.keyCode == 46) {
+          c = "Suprr";
+          e.preventDefault();
+        }
+        else if(e.keyCode == 35) {
+          c = "Fin";
+          e.preventDefault();
+        }
+        else if(e.keyCode == 36) {
+          c = "Home";
+          e.preventDefault();
+        }
+        else if(e.keyCode == 33) {
+          c = "Page Up";
+          e.preventDefault();
+        }
+        else if(e.keyCode == 34) {
+          c = "Page Down";
+          e.preventDefault();
+        }
+        else if(e.keyCode == 38) {
+          c = "Haut";
+          e.preventDefault();
+        }
+        else if(e.keyCode == 37) {
+          c = "Gauche";
+          e.preventDefault();
+        }
+        else if(e.keyCode == 40) {
+          c = "Bas";
+          e.preventDefault();
+        }
+        else if(e.keyCode == 39) {
+          c = "Droite";
+          e.preventDefault();
+        }
         if(c) {
           switchPressedLetters(c);
         }
@@ -257,7 +353,7 @@ app.controller('Keyboard.main', ["$scope", "SCFRKeyboardAPI","$document", functi
     }
   }
 
-    var keysdone=0;
+  var keysdone=0;
   $scope.$on("doneUpadtingKey", function doneFocusing() {
     keysdone++;
     if(keysdone == 111) {
@@ -373,14 +469,14 @@ app.controller('aSingleKey', ["$scope","$element","$timeout", function ($scope,e
 
   $scope.$on("newKeyboard",function() {
 
-      delete $scope.keyText;
-      $scope.modifierName = "";
-      $scope.isModifier = false;
+    delete $scope.keyText;
+    $scope.modifierName = "";
+    $scope.isModifier = false;
 
-      var modif = $scope.$parent.getKeyModifier($scope.char);
-      $scope.isModifier = modif.is;
-      $scope.modifierName = angular.copy(modif.name);
-      $scope.keyText = angular.copy($scope.$parent.getKey($scope.char)) || {0:null};
+    var modif = $scope.$parent.getKeyModifier($scope.char);
+    $scope.isModifier = modif.is;
+    $scope.modifierName = angular.copy(modif.name);
+    $scope.keyText = angular.copy($scope.$parent.getKey($scope.char)) || {0:null};
 
   });
 

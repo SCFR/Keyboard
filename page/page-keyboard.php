@@ -8,8 +8,13 @@ else {
   get_header();
   ?>
   <script>
-    // To prevent double call, give JSON directly.
-    var CURRENT_PAGE = {model: <?php print_r(json_encode($selector)); ?>};
+  // To prevent double call, give JSON directly.
+  var CURRENT_PAGE = {model: <?php print_r(json_encode($selector)); ?>};
+  jQuery(function($) {
+    $(document).tooltip({
+      selector: '[data-toggle="tooltip"]'
+    });
+  });
   </script>
 
   <main class="row-fluid" id="content" role="main" ng-controller="Keyboard.main">
@@ -22,5 +27,5 @@ else {
 
 
   <?php get_footer(); } ?>
-<script src="<?php echo plugins_url( "SCFR-Keyboard" ); ?>/js/keyboard.app.js"></script>
-<link href="<?php echo plugins_url( "SCFR-Keyboard" ); ?>/css/keyboard.css" rel="stylesheet" />
+  <script src="<?php echo plugins_url( "SCFR-Keyboard" ); ?>/js/keyboard.app.js"></script>
+  <link href="<?php echo plugins_url( "SCFR-Keyboard" ); ?>/css/keyboard.css" rel="stylesheet" />
