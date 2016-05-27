@@ -15,9 +15,7 @@
   </div>
 
   <div class="explains">
-    <span ng-repeat="(mod, explain) in keyText" class="explain {{escapize(mod)}}" ng-if="mod!=0">
-      {{explain}}
-    </span>
+    <span ng-repeat="(mod, explain) in keyText" class="explain {{escapize(mod)}}" ng-if="mod!=0 && !explain.isEmpty()">{{explain}}</span>
   </div>
 
   <div class="edit">
