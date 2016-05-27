@@ -2,6 +2,9 @@ var scripts= document.getElementsByTagName('script');
 var path= scripts[scripts.length-1].src.split('?')[0];
 var KEYBOARDPATH = path.split('/').slice(0, -1).join('/')+'/';
 var APIPATH = KEYBOARDPATH+"../../../.."
+String.prototype.isEmpty = function() {
+  return (this.length === 0 || !this.trim());
+};
 
 app.service('SCFRKeyboardAPI', ['$http', function($http) {
 
@@ -33,6 +36,7 @@ app.controller('Keyboard.main', ["$scope", "SCFRKeyboardAPI","$document", functi
   $scope.selector = CURRENT_PAGE.model;
   $scope.isEditMod = false;
   $scope.pressedLetter = false;
+
 
   selectKeyboard = function (keyboard) {
     $scope.currentKeyboard = angular.copy(keyboard);
@@ -71,6 +75,13 @@ app.controller('Keyboard.main', ["$scope", "SCFRKeyboardAPI","$document", functi
   $scope.getKey = function(id) {
     if($scope.currentKeyboard && $scope.currentKeyboard.keyboard_keys && $scope.currentKeyboard.keyboard_keys.keys) {
       return $scope.currentKeyboard.keyboard_keys.keys[id];
+
+      keys = {0:null};
+      angular.forEach($scope.currentKeyboard.keyboard_keys.keys[id], function(val, id) {
+        if(!val.isEmpty())
+          keys[id] = val;
+      });
+      return keys;
     }
     else return null
   }
