@@ -39,9 +39,17 @@ app.controller('Keyboard.main', ["$scope", "SCFRKeyboardAPI","$document", functi
 
 
   selectKeyboard = function (keyboard) {
+    delete $scope.currentKeyboard;
     $scope.currentKeyboard = angular.copy(keyboard);
     $scope.currentKeyboard.keyboard_keys.modificators = $scope.currentKeyboard.keyboard_keys.modificators || {};
     $scope.currentKeyboard.keyboard_keys.keys = $scope.currentKeyboard.keyboard_keys.keys || {};
+
+    angular.forEach($scope.currentKeyboard.keyboard_keys.keys, function(val, key) {
+      angular.forEach(val, function(value, id) {
+        if(value == "") delete val[id];
+      });
+    });
+    
     $scope.currentVersion = keyboard.version_id;
     $scope.currentName = keyboard.name;
     $scope.newVersion = $scope.currentVersion;
@@ -79,7 +87,7 @@ app.controller('Keyboard.main', ["$scope", "SCFRKeyboardAPI","$document", functi
       keys = {0:null};
       angular.forEach($scope.currentKeyboard.keyboard_keys.keys[id], function(val, id) {
         if(!val.isEmpty())
-          keys[id] = val;
+        keys[id] = val;
       });
       return keys;
     }
