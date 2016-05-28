@@ -48,13 +48,23 @@ app.controller('Keyboard.main', ["$scope", "SCFRKeyboardAPI","$document", functi
       angular.forEach(val, function(value, id) {
         if(value == "") delete val[id];
       });
+      if(val === {})
+        delete val;
     });
-    
+
     $scope.currentVersion = keyboard.version_id;
     $scope.currentName = keyboard.name;
     $scope.newVersion = $scope.currentVersion;
     $scope.newName = $scope.currentName;
 
+    $scope.currentKeyboard.keyCount = Object.keys($scope.currentKeyboard.keyboard_keys.keys).length;
+    $scope.currentKeyboard.modificatorCount = Object.keys($scope.currentKeyboard.keyboard_keys.modificators).length;
+
+    $scope.currentKeyboard.date_last_modified = Date.parse($scope.currentKeyboard.date_last_modified);
+    $scope.currentKeyboard.date_created = Date.parse($scope.currentKeyboard.date_created);
+
+
+    $scope.colorized = [];
     $scope.$broadcast("newKeyboard");
   }
 
@@ -137,6 +147,19 @@ app.controller('Keyboard.main', ["$scope", "SCFRKeyboardAPI","$document", functi
           });
         }
       }
+    }
+  }
+
+  $scope.escapize = function(char) {
+    var low = char.toLowerCase().replace(/\s/g, '');
+    if( ['altgr', 'alt', 'f3', 'default'].indexOf(low) != -1)
+      return "colorize_"+low;
+    else {
+      if($scope.colorized.indexOf(low) == -1) {
+        $scope.colorized.push(low);
+      }
+      console.log($scope.colorized);
+      return "colorize_"+$scope.colorized.indexOf(low);
     }
   }
 
@@ -417,9 +440,7 @@ app.controller('aSingleKey', ["$scope","$element","$timeout", function ($scope,e
   }
 
   init();
-  $scope.escapize = function(char) {
-    return "colorize_"+char.toLowerCase().replace(/\s/g, '');
-  }
+  $scope.escapize = $scope.$parent.escapize;
 
   $scope.toggleClick = function() {
     $scope.clicked = !$scope.clicked;
