@@ -1,23 +1,35 @@
 <div class="col-md-12">
-  <div class="select" ng-show="!isEditMod">
-    <select ng-model="currentVersion" class="kVersion"  ng-options="v as v for (v,name) in selector.keyboards">
-    </select>
-    <select ng-model="currentName" class="kName"  ng-options="v as k.name for (v,k) in selector.keyboards[currentVersion]">
-    </select>
+  <div class="legend">
+    <div class="col-lg-3 col-md-6">
+      <span class="lefty">Version : </span><span>
+        <select ng-model="currentVersion"  ng-show="!isEditMod" class="kVersion"  ng-options="v as v for (v,name) in selector.keyboards">
+        </select>
+        <input type="text"  ng-show="isEditMod" ng-model="newVersion" class="kVersion">
+      </span>
+      <br />
+      <span class="lefty">Clavier : </span><span>
+        <select ng-model="currentName" class="kName"  ng-show="!isEditMod"  ng-options="v as k.name for (v,k) in selector.keyboards[currentVersion]">
+        </select>
+        <input type="text" ng-model="newName"  ng-show="isEditMod" class="kName"  placeholder="Nom du nouveau clavier">
+      </span>
+    </div>
+    <div class="col-lg-3 col-md-6">
+      <span class="lefty">création : </span><span>{{ currentKeyboard.date_created | date:'dd/MM/yy' }}</span><br />
+      <span class="lefty">mise à jour : </span><span>{{ currentKeyboard.date_last_modified | date:'dd/MM/yy' }}</span><br />
+      <span class="lefty">modificateur{{currentKeyboard.modificatorCount > 1 ? 's' : ''}} : </span><span>{{ currentKeyboard.modificatorCount }}</span><br />
+      <span class="lefty">touche{{currentKeyboard.keyCount > 1 ? 's' : ''}}  : </span><span>{{ currentKeyboard.keyCount }}</span><br />
 
-    <button type="button" ng-click="editMod(true)" ng-if="selector.isAdmin"  data-toggle="tooltip" data-placement="top" title="Mode édition"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-  </div>
-  <div class="add" ng-show="isEditMod">
-    <input type="text" ng-model="newVersion" class="kVersion">
-    <input type="text" ng-model="newName" class="kName" placeholder="Nom du nouveau clavier">
-
-    <button type="button" ng-click="copyKeyboard()" data-toggle="tooltip" data-placement="top" title="Copier clavier" ><i class="fa fa-clone" aria-hidden="true"></i></button>
-    <button type="button" ng-click="submitNewKeyboard()"  data-toggle="tooltip" data-placement="top" title="Valider modifications"><i class="fa fa-check" aria-hidden="true"></i></button>
-    <button type="button" ng-click="editMod(false)"  data-toggle="tooltip" data-placement="top" title="Annuler modifications"><i class="fa fa-ban" aria-hidden="true"></i></button>
-    <button type="button" class="delete" ng-click="deleteKeyboard()"  data-toggle="tooltip" data-placement="top" title="Suprimer le clavier"><i class="fa fa-trash" aria-hidden="true"></i></button>
+    </div>
+    <div class="col-md-12">  <button type="button" ng-click="editMod(true)" ng-if="selector.isAdmin"  ng-show="!isEditMod"  data-toggle="tooltip" data-placement="top" title="Mode édition"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+      <button type="button" ng-click="copyKeyboard()"  ng-show="isEditMod" data-toggle="tooltip" data-placement="top" title="Copier clavier" ><i class="fa fa-clone" aria-hidden="true"></i></button>
+      <button type="button" ng-click="submitNewKeyboard()"  ng-show="isEditMod" data-toggle="tooltip" data-placement="top" title="Valider modifications"><i class="fa fa-check" aria-hidden="true"></i></button>
+      <button type="button" ng-click="editMod(false)"  ng-show="isEditMod" data-toggle="tooltip" data-placement="top" title="Annuler modifications"><i class="fa fa-ban" aria-hidden="true"></i></button>
+      <button type="button" class="delete" ng-click="deleteKeyboard()"  ng-show="isEditMod" data-toggle="tooltip" data-placement="top" title="Suprimer le clavier"><i class="fa fa-trash" aria-hidden="true"></i></button>
+    </div>
+    <div class="clear"></div>
   </div>
 
   <div class="spinner" ng-show="busy">
-      <hub-loading-spinner></hub-loading-spinner>
+    <hub-loading-spinner></hub-loading-spinner>
   </div>
 </div>

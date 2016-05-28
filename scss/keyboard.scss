@@ -25,14 +25,48 @@ $keyMargin: 5px;
 #keyboardContainer {
   text-align:center;
 }
-#keyboardContainer .spinner {
-    width: 35px;
-    float: left;
-    height: 35px;
-    margin-top: -157px;
-    margin-left: 12px;
+#keyboardContainer .bottomLegend {
+  text-align:left;
+  padding:20px;
+  h3 {
+    text-transform: uppercase;
+    font-weight: 100;
+    letter-spacing: 5px;
+    padding: 0px;
+    margin-bottom: 0px;
+  }
+  ul {
+    padding-left: 2em;
+    list-style: none;
+  }
 }
-#keyboardContainer .select, #keyboardContainer .add {
+#keyboardContainer .spinner {
+  width: 35px;
+  float: left;
+  height: 35px;
+  margin-top: -157px;
+  margin-left: 12px;
+}
+#keyboardContainer .legend {
+  text-align: left;
+  margin: 20px;
+  background: rgb(32, 42, 49);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  padding: 10px;
+  font-family: "Electrolize";
+  span.lefty {
+    width: 210px;
+    display: inline-block;
+    text-align: right;
+    padding-right: 1em;
+    letter-spacing: 5px;
+    font-size: 1em;
+    text-transform: uppercase;
+    color: #989898;
+  }
+  span.righty {
+
+  }
   input, select {
     border: 1px solid #30424D;
     padding: 20px;
@@ -40,17 +74,6 @@ $keyMargin: 5px;
     font-size: 2em;
     font-family: "Electrolize";
     width: 222px;
-    margin-bottom: 20px;
-    &:first-of-type {
-      margin-left: 3em;
-      width: 130px;
-      color: grey;
-      font-size:1.5em;
-      margin-top: 2em;
-      &:active {
-        outline: 1px solid rgba(255, 255, 255, 0.12);
-      }
-    }
   }
   button {
     display: inline-block;
@@ -79,175 +102,175 @@ $keyMargin: 5px;
 
 
 #keyboardContainer > ul {
-margin: 20px 0px;
-padding: 0;
-list-style: none;
-display:inline-block;
-position:relative;
-&#keyboard {
-  min-width: 15*$keyWidth + 16*$keyMargin;
-}
-&#special {
-  min-width: 3*$keyWidth + 4*$keyMargin;
-}
-&#numpad {
-  min-width: 4*$keyWidth + 5*$keyMargin;
-}
- >  li {
-  float: left;
-  margin: 0 $keyMargin $keyMargin 0;
-  width: $keyWidth;
-  height: $keyHeight;
-  line-height: 40px;
-  text-align: center;
-  overflow:hidden;
-  padding-right: 11px;
-  transition: width, height, margin-left, transform 0.5s;
-  background: #fff;
-  background: #364A57;
-  border: 1px solid #6490AD;
-  border-radius: 5px 0px 5px 0px;
-  -moz-border-radius: 5px 0px 5px 0px;
-  -webkit-border-radius: 5px 0px 5px 0px;
-  &.letter, &.symbol {
-    padding-right:0px;
+  margin: 20px 0px;
+  padding: 0;
+  list-style: none;
+  display:inline-block;
+  position:relative;
+  &#keyboard {
+    min-width: 15*$keyWidth + 16*$keyMargin;
   }
-  &:not(.clicked) {
-    position:relative;
-    > .explains {
-      position: absolute;
-      bottom: 2px;
-      width: 100%;
-      padding: 0px 2px;
-      > .explain  {
-        width: 100%;
-        display: block;
-        line-height: 1em;
-        font-size: 9px;
-        text-align: left;
-        white-space: pre-line;
-      }
-    }
-    > .edit {
-      display:none;
-    }
+  &#special {
+    min-width: 3*$keyWidth + 4*$keyMargin;
   }
-  &.focused {
-    opacity: 1 !important;
-    transform: scale(1.1);
-    box-shadow: 0px 0px 10px black;
-    border: 1px solid #68A5CC;
-    z-index: 999;
-    & + .focused {
-      margin-left:10px;
-    }
+  &#numpad {
+    min-width: 4*$keyWidth + 5*$keyMargin;
   }
-  &.clicked {
-    //transform:scale(3);
-    width:5*$keyWidth;
-    height:5*$keyHeight;
-    z-index:999;
-    position:absolute;
-    > .explains {
-      display:none;
+  >  li {
+    float: left;
+    margin: 0 $keyMargin $keyMargin 0;
+    width: $keyWidth;
+    height: $keyHeight;
+    line-height: 40px;
+    text-align: center;
+    overflow:hidden;
+    padding-right: 11px;
+    transition: width, height, margin-left, transform 0.5s;
+    background: #fff;
+    background: #364A57;
+    border: 1px solid #6490AD;
+    border-radius: 5px 0px 5px 0px;
+    -moz-border-radius: 5px 0px 5px 0px;
+    -webkit-border-radius: 5px 0px 5px 0px;
+    &.letter, &.symbol {
+      padding-right:0px;
     }
-    > .edit {
-      text-align: left;
-      textarea {
-        width: 100%;
-        background: #2E3F4A;
-        padding: 5px 10px;
-        border: 1px solid rgba(255,255,255,0.13);
-        font-size: 15px;
-        line-height: 1em;
-        height: 3em;
-      }
-      .modificateur {
-        margin-bottom: 20px;
-        label {
-          margin-left: 10px;
-          input[type="checkbox"] {
-            margin-right:5px;
-          }
-        }
-
-      }
-      .texts {
+    &:not(.clicked) {
+      position:relative;
+      > .explains {
         position: absolute;
-        bottom: 0px;
+        bottom: 2px;
         width: 100%;
-        max-height: 280px;
-        list-style: none;
-        padding-left: 0px;
-        .textModifContainer  {
-          position:relative;
-          span {
-            position: absolute;
-            font-size: 13px;
-            background: rgba(0, 0, 0, 0.28);
-            height: 21px;
-            width: 25px;
-            right: 2px;
-            top: 31px;
-            line-height: 1em;
-            padding: 4px;
+        padding: 0px 2px;
+        > .explain  {
+          width: 100%;
+          display: block;
+          line-height: 1em;
+          font-size: 9px;
+          text-align: left;
+          white-space: pre-line;
+        }
+      }
+      > .edit {
+        display:none;
+      }
+    }
+    &.focused {
+      opacity: 1 !important;
+      transform: scale(1.1);
+      box-shadow: 0px 0px 10px black;
+      border: 1px solid #68A5CC;
+      z-index: 999;
+      & + .focused {
+        margin-left:10px;
+      }
+    }
+    &.clicked {
+      //transform:scale(3);
+      width:5*$keyWidth;
+      height:5*$keyHeight;
+      z-index:999;
+      position:absolute;
+      > .explains {
+        display:none;
+      }
+      > .edit {
+        text-align: left;
+        textarea {
+          width: 100%;
+          background: #2E3F4A;
+          padding: 5px 10px;
+          border: 1px solid rgba(255,255,255,0.13);
+          font-size: 15px;
+          line-height: 1em;
+          height: 3em;
+        }
+        .modificateur {
+          margin-bottom: 20px;
+          label {
+            margin-left: 10px;
+            input[type="checkbox"] {
+              margin-right:5px;
+            }
+          }
+
+        }
+        .texts {
+          position: absolute;
+          bottom: 0px;
+          width: 100%;
+          max-height: 280px;
+          list-style: none;
+          padding-left: 0px;
+          .textModifContainer  {
+            position:relative;
+            span {
+              position: absolute;
+              font-size: 13px;
+              background: rgba(0, 0, 0, 0.28);
+              height: 21px;
+              width: 25px;
+              right: 2px;
+              top: 31px;
+              line-height: 1em;
+              padding: 4px;
+            }
           }
         }
       }
     }
-  }
-  > .top {
-    width:100%;
-    > .modifierName {
-      position: absolute;
-      line-height: 1em;
-      padding: 5px;
-      font-size: 10px;
-    }
-    > .chars {
-      width:35px;
-      height:25px;
-      margin-top: 5px;
-      float:right;
-      line-height: 1em;
-      text-align:center;
-      > span {
-        float:left;
-        width:50%;
-        &:first-child {
-          clear:right;
-          width:100%;
+    > .top {
+      width:100%;
+      > .modifierName {
+        position: absolute;
+        line-height: 1em;
+        padding: 5px;
+        font-size: 10px;
+      }
+      > .chars {
+        width:35px;
+        height:25px;
+        margin-top: 5px;
+        float:right;
+        line-height: 1em;
+        text-align:center;
+        > span {
+          float:left;
+          width:50%;
+          &:first-child {
+            clear:right;
+            width:100%;
+          }
         }
       }
     }
-  }
 
 
 
-  &:hover {
-    border-color: $borderColorHover;
-    cursor: pointer;
-  }
-  &.empty {
-    background:transparent;
-    pointer-events: none;
-    border:none;
-    &.fn {
-      width:$keyWidth/2;
-      margin-right:0px;
+    &:hover {
+      border-color: $borderColorHover;
+      cursor: pointer;
     }
-  }
-  &.fn {
-    margin-bottom: 3em;
-  }
-  &.unused:not(.clicked) {
-    opacity:0.7;
-  }
-  &.symbol {
-  }
-  &.break {
-  clear: left;
-  }
+    &.empty {
+      background:transparent;
+      pointer-events: none;
+      border:none;
+      &.fn {
+        width:$keyWidth/2;
+        margin-right:0px;
+      }
+    }
+    &.fn {
+      margin-bottom: 3em;
+    }
+    &.unused:not(.clicked) {
+      opacity:0.7;
+    }
+    &.symbol {
+    }
+    &.break {
+      clear: left;
+    }
 
     &.tab,   &.left-shift{
       width: 1.5*$keyWidth;
@@ -307,7 +330,7 @@ position:relative;
       margin-right: 0;
     }
     &.uppercase {
-    text-transform: uppercase;
+      text-transform: uppercase;
     }
     &.space {
       width: 5*$keyWidth;
@@ -322,7 +345,7 @@ position:relative;
       }
     }
     &.on {
-    display: none;
+      display: none;
     }
     &.plus {
       height: $keyHeight*2 + $keyMargin ;
@@ -355,16 +378,16 @@ position:relative;
 $offset: 187;
 $duration: 1.4s;
 .hub_spinner {
-    animation: rotator $duration linear infinite;
+  animation: rotator $duration linear infinite;
 
-    .path {
-      stroke-dasharray: $offset;
-      stroke-dashoffset: 0;
-      transform-origin: center;
-      animation:
-        dash $duration ease-in-out infinite,
-        colors ($duration*2) ease-in-out infinite;
-    }
+  .path {
+    stroke-dasharray: $offset;
+    stroke-dashoffset: 0;
+    transform-origin: center;
+    animation:
+    dash $duration ease-in-out infinite,
+    colors ($duration*2) ease-in-out infinite;
+  }
 
 }
 @keyframes rotator {
@@ -373,33 +396,38 @@ $duration: 1.4s;
 }
 
 @keyframes colors {
-	0% { stroke: #3e505d; }
-	50% { stroke: #497a89; }
+  0% { stroke: #3e505d; }
+  50% { stroke: #497a89; }
   100% { stroke: #33bce6; }
 }
 
 @keyframes dash {
- 0% { stroke-dashoffset: $offset; }
- 50% {
-   stroke-dashoffset: $offset/4;
-   transform:rotate(135deg);
- }
- 100% {
-   stroke-dashoffset: $offset;
-   transform:rotate(450deg);
- }
+  0% { stroke-dashoffset: $offset; }
+  50% {
+    stroke-dashoffset: $offset/4;
+    transform:rotate(135deg);
+  }
+  100% {
+    stroke-dashoffset: $offset;
+    transform:rotate(450deg);
+  }
 }
 
 .colorize_altgr {
   color:#c22a3a;
 }
-
 .colorize_alt {
   color:#f6941d;
 }
 .colorize_f3 {
   color:#2280c2;
 }
-.colorize_ {
-  color:#91c846;
+.colorize_0 {
+  color:#6cd264;
+}
+.colorize_1 {
+  color:#af64d2;
+}
+.colorize_2 {
+  color:#969696;
 }
