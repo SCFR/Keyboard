@@ -263,7 +263,7 @@ $keyMargin: 5px;
     &.fn {
       margin-bottom: 3em;
     }
-    &.unused:not(.clicked) {
+    &.unused:not(.clicked, .mouse) {
       opacity:0.7;
     }
     &.symbol {
@@ -370,6 +370,37 @@ $keyMargin: 5px;
         height: $keyHeight*5;
       }
     }
+
+    &.bottomMouse {
+      height: $keyHeight*3 + 15;
+      width: $keyWidth*3.5 + 5;
+      border-bottom-left-radius: 40%;
+      border-bottom-right-radius: 40%;
+      clear:left;
+      margin-right:0px;
+    }
+    &.middlemouse {
+      height: $keyHeight*1;
+      width: $keyWidth*0.5;
+      border-radius:40%;
+      margin-top: $keyHeight*0.5;
+      position:absolute;
+      left: $keyWidth*1.75 - $keyWidth*0.25;
+      z-index:30;
+      opacity:1;
+      box-shadow: 0px 0px 4px 4px #26323a,0px 0px 4px 4px #26323a,0px 0px 4px 4px #26323a;
+    }
+    &.leftmouse, &.rightmouse {
+      height: $keyHeight*2;
+      width: $keyWidth*1.75;
+      &.leftmouse {
+        border-top-left-radius: 40%;
+      }
+      &.rightmouse {
+        border-top-right-radius:40%;
+      }
+    }
+
   }
 }
 
