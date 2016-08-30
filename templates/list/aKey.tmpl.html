@@ -1,0 +1,8 @@
+<div>
+  <div  data-as-sortable-item-handle>
+    <span class="keyName">{{key.keyName}}</span>
+
+    <div>{{key.behavior.default}}</div>
+    <div ng-repeat="(mod, text) in key.behavior track by mod" ng-if="mod != 'default'">{{text}}</div>
+  </div>
+</div>

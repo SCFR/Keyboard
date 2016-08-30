@@ -1,0 +1,10 @@
+<div>
+  <h4 contenteditable="true" ng-model="section.title">{{section.title}}</h4>
+
+  <p contenteditable="true" ng-model="section.description">{{section.description}}</p>
+
+  <ul id="List" data-as-sortable="board.dragControlListeners" data-ng-model="keys.keys">
+    <a-key-list ng-repeat="key in keys.keys track by $index" key="key" data-as-sortable-item></a-key-list>
+  </ul>
+
+</div>

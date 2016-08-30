@@ -6,6 +6,7 @@ String.prototype.isEmpty = function() {
   return (this.length === 0 || !this.trim());
 };
 
+app.requires.push('as.sortable');
 app.service('SCFRKeyboardAPI', ['$http', function($http) {
 
   this.editKeyboard = function( _keyboard ) {
@@ -49,7 +50,7 @@ app.controller('Keyboard.main', ["$scope", "SCFRKeyboardAPI","$document", functi
         if(value == "") delete val[id];
       });
       if(val === {})
-        delete val;
+      delete val;
     });
 
     $scope.currentVersion = keyboard.version_id;
@@ -153,12 +154,11 @@ app.controller('Keyboard.main', ["$scope", "SCFRKeyboardAPI","$document", functi
   $scope.escapize = function(char) {
     var low = char.toLowerCase().replace(/\s/g, '');
     if( ['altgr', 'alt', 'f3', 'default'].indexOf(low) != -1)
-      return "colorize_"+low;
+    return "colorize_"+low;
     else {
       if($scope.colorized.indexOf(low) == -1) {
         $scope.colorized.push(low);
       }
-      console.log($scope.colorized);
       return "colorize_"+$scope.colorized.indexOf(low);
     }
   }
@@ -395,6 +395,14 @@ app.controller('Keyboard.main', ["$scope", "SCFRKeyboardAPI","$document", functi
     }
   }
 
+  $scope.addNewSection = function() {
+    if($scope.currentKeyboard.keyboard_keys.sections)
+      $scope.currentKeyboard.keyboard_keys.sections.push({title: "Entrez le titre de la section", description:"Entrez la description de la section"});
+    else {
+      $scope.currentKeyboard.keyboard_keys.sections = [{title: "Entrez le titre de la section", description:"Entrez la description de la section"}];
+    }
+  }
+
   var keysdone=0;
   $scope.$on("doneUpadtingKey", function doneFocusing() {
     keysdone++;
@@ -403,7 +411,6 @@ app.controller('Keyboard.main', ["$scope", "SCFRKeyboardAPI","$document", functi
       keysdone=0
     }
   });
-
   selectFirstKeyboard();
 
 }]);
@@ -463,7 +470,6 @@ app.controller('aSingleKey', ["$scope","$element","$timeout", function ($scope,e
       });
       if(Object.keys(d).length > 0) {
         $scope.$emit("textChanged", $scope.char, d);
-        console.log("emited change");
         $scope.isUsed = true;
       }
       else $scope.isUsed = false;
@@ -543,6 +549,41 @@ app.controller('aSingleKey', ["$scope","$element","$timeout", function ($scope,e
 
 }]);
 
+app.controller('aListSectionController', ["$scope","$element","$timeout", function ($scope,elem,$timeout) {
+  $scope.section = $scope.section || {
+    title:"Divers",
+    description:"Toutes les autres touches du claviers non catégorisées."
+  };
+
+  $scope.$parent.$watch('currentKeyboard.keyboard_keys',function(val) {
+    $scope.keys = convert_to_array(val);
+
+
+    console.log($scope.keys);
+
+
+  });
+
+  convert_to_array = function(keys) {
+    var r = keys;
+    var trusted = [];
+    angular.forEach(r.keys, function(content,key) {
+      var newKey = {keyName: key, behavior: content};
+      trusted.push(newKey);
+    });
+    return {modificators: keys.modificators, keys: trusted};
+  }
+
+  $scope.dragControlListeners = {
+    accept: function (sourceItemHandleScope, destSortableScope) {return boolean},
+    itemMoved: function (event) {},
+    orderChanged: function(event) {},
+    clone: true, //optional param for clone feature.
+    allowDuplicates: false, //optional param allows duplicates to be dropped.
+  };
+
+}]);
+
 
 app.directive('keyboardHeader', function() {
   return {
@@ -565,6 +606,38 @@ app.directive('aKeyboard', function() {
     templateUrl: KEYBOARDPATH+"../templates/keyboard/aKeyboard.tmpl.html",
     restrict:'E',
     replace: true
+  };
+});
+
+app.directive('aKeyboardList', function() {
+  return {
+    templateUrl: KEYBOARDPATH+"../templates/list/aList.tmpl.html",
+    restrict:'E',
+    replace: true
+  };
+});
+
+app.directive('aKeyList', function() {
+  return {
+    templateUrl: KEYBOARDPATH+"../templates/list/aKey.tmpl.html",
+    restrict:'E',
+    scope: {
+      key:'=',
+      behavior:'=',
+    },
+    replace: true
+  };
+});
+
+app.directive('aListSection', function() {
+  return {
+    templateUrl: KEYBOARDPATH+"../templates/list/aSection.tmpl.html",
+    restrict:'E',
+    scope: {
+      section:'=',
+    },
+    replace: true,
+    controller:'aListSectionController',
   };
 });
 

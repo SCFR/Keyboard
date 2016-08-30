@@ -1,0 +1,14 @@
+<div id="keyboardListContainer">
+
+  <h1>Listes des touches</h1>
+
+  <div class="col-md-10 col-md-offset-1">
+    <button type="button" ng-click="addNewSection()" data-toggle="tooltip" data-placement="top" title="Ajouter une section"><i class="fa fa-plus" aria-hidden="true"></i></button>
+
+
+    <a-list-section ng-repeat="section in currentKeyboard.keyboard_keys.sections" section="section"></a-list-section>
+    <a-list-section></a-list-section>
+
+
+  </div>
+</div>

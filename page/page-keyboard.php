@@ -23,9 +23,13 @@ else {
 
     <a-keyboard></a-keyboard>
 
+    <a-keyboard-list></a-keyboard-list>
+
   </main>
 
 
   <?php get_footer(); } ?>
+  <script src="<?php echo plugins_url( "SCFR-Keyboard" ); ?>/js/vendor/ng-sortable.min.js"></script>
+  <link href="<?php echo plugins_url( "SCFR-Keyboard" ); ?>/css/ng-sortable.min.css" rel="stylesheet" />
   <script src="<?php echo plugins_url( "SCFR-Keyboard" ); ?>/js/keyboard.app.js"></script>
   <link href="<?php echo plugins_url( "SCFR-Keyboard" ); ?>/css/keyboard.css" rel="stylesheet" />
