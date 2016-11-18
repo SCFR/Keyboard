@@ -3,6 +3,9 @@ $keyWidth: 78px;
 $borderColorHover: #e5e5e5;
 $keyMargin: 5px;
 
+html {
+    background-color: #26323a !important;
+}
 #KeyboardHeader {
   background-image:url(//www.starcitizen.fr/wp-content/uploads/2016/01/landscape-1448027193-mark-hamill.png);
   height: 350px;

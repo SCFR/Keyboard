@@ -1,14 +1,22 @@
-<div id="keyboardListContainer">
+<div id="keyboardListContainer" flex="90" flex-offset="5">
 
-  <h1>Listes des touches</h1>
+  <md-toolbar class="md-hue-2">
+    <div class="md-toolbar-tools">
+      <md-button class="md-icon-button" aria-label="Settings" ng-disabled="true">
+        <md-icon>list</md-icon>
+      </md-button>
+      <h2>
+        <span>Listes des touches</span>
+      </h2>
+    </div>
+  </md-toolbar>
 
-  <div class="col-md-10 col-md-offset-1">
-    <button type="button" ng-click="addNewSection()" data-toggle="tooltip" data-placement="top" title="Ajouter une section"><i class="fa fa-plus" aria-hidden="true"></i></button>
-
-
+  <md-button type="button" ng-click="addNewSection()">
+    <md-icon>add</md-icon>
+    Ajouter une nouvelle section
+  </md-button>
+  <div layout layout-padding layout-wrap>
     <a-list-section ng-repeat="section in currentKeyboard.keyboard_keys.sections" section="section"></a-list-section>
     <a-list-section></a-list-section>
-
-
   </div>
 </div>
