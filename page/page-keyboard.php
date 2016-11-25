@@ -12,11 +12,6 @@ else {
     var CURRENT_PAGE = {
       model: <?php print_r(json_encode($selector)); ?>
     };
-    jQuery(function($) {
-      $(document).tooltip({
-        selector: '[data-toggle="tooltip"]'
-      });
-    });
   </script>
 
   <main class="row-fluid" id="content" role="main" ng-controller="Keyboard.main">
