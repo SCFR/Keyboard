@@ -1,0 +1,30 @@
+{
+  "name": "SCFR.keyboard",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Gruntfile.js",
+  "dependencies": {
+    "grunt": "^0.4.5",
+    "grunt-include-source": "^0.7.1"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-compass": "^1.1.1",
+    "grunt-contrib-uglify": "^0.11.1",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-include-source": "^0.7.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Superd22/SCFR.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Superd22/SCFR/issues"
+  },
+  "homepage": "https://github.com/Superd22/SCFR"
+}

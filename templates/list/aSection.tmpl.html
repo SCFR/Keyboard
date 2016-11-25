@@ -1,0 +1,17 @@
+<div flex="33">
+  <md-toolbar layout="row" class="md-hue-1">
+    <div class="md-toolbar-tools">
+      <h4 contenteditable="true" ng-model="section.title">{{section.title}}</h4>
+    </div>
+  </md-toolbar>
+  <md-content>
+    <md-list flex data-as-sortable="board.dragControlListeners" data-ng-model="keys.keys">
+      <md-subheader class="md-no-sticky md-hue-2">
+        <p contenteditable="true" ng-model="section.description">{{section.description}}</p>
+      </md-subheader>
+      <md-divider></md-divider>
+      <a-key-list ng-repeat="key in keys.keys track by $index" key="key" data-as-sortable-item></a-key-list>
+
+      <md-divider></md-divider>
+  </md-content>
+</div>

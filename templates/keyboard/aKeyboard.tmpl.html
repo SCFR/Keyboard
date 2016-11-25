@@ -2,7 +2,19 @@
 
   <keyboard-title-selector></keyboard-title-selector>
 
-  <ul id="keyboard" >
+
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <md-button class="md-icon-button" aria-label="Settings" ng-disabled="true">
+        <md-icon>keyboard</md-icon>
+      </md-button>
+      <h2>
+        <span>Clavier</span>
+      </h2>
+    </div>
+  </md-toolbar>
+
+  <ul id="keyboard">
 
     <a-key key-class=" fn" char="Echape"></a-key>
     <a-key key-class="empty"></a-key>
@@ -23,17 +35,17 @@
 
     <a-key key-class="symbol break" char="²"></a-key>
     <a-key key-class="symbol" char="&" maj-char="1"></a-key>
-    <a-key key-class="symbol" char="é" maj-char="2"  alt-gr-char="~"></a-key>
+    <a-key key-class="symbol" char="é" maj-char="2" alt-gr-char="~"></a-key>
     <a-key key-class="symbol" char="''" maj-char="3" alt-gr-char="#"></a-key>
-    <a-key key-class="symbol" char="'" maj-char="4"  alt-gr-char="{"></a-key>
-    <a-key key-class="symbol" char="(" maj-char="5"  alt-gr-char="["></a-key>
-    <a-key key-class="symbol" char="-" maj-char="6"  alt-gr-char="|"></a-key>
-    <a-key key-class="symbol" char="è" maj-char="7"  alt-gr-char="`"></a-key>
-    <a-key key-class="symbol" char="_" maj-char="8"  alt-gr-char="\"></a-key>
-    <a-key key-class="symbol" char="ç" maj-char="9"  alt-gr-char="^"></a-key>
-    <a-key key-class="symbol" char="à" maj-char="0"  alt-gr-char="@"></a-key>
-    <a-key key-class="symbol" char=")" maj-char="°"  alt-gr-char="]"></a-key>
-    <a-key key-class="symbol" char="=" maj-char="+"  alt-gr-char="}"></a-key>
+    <a-key key-class="symbol" char="'" maj-char="4" alt-gr-char="{"></a-key>
+    <a-key key-class="symbol" char="(" maj-char="5" alt-gr-char="["></a-key>
+    <a-key key-class="symbol" char="-" maj-char="6" alt-gr-char="|"></a-key>
+    <a-key key-class="symbol" char="è" maj-char="7" alt-gr-char="`"></a-key>
+    <a-key key-class="symbol" char="_" maj-char="8" alt-gr-char="\"></a-key>
+    <a-key key-class="symbol" char="ç" maj-char="9" alt-gr-char="^"></a-key>
+    <a-key key-class="symbol" char="à" maj-char="0" alt-gr-char="@"></a-key>
+    <a-key key-class="symbol" char=")" maj-char="°" alt-gr-char="]"></a-key>
+    <a-key key-class="symbol" char="=" maj-char="+" alt-gr-char="}"></a-key>
     <a-key key-class="delete lastitem" char="Retour"></a-key>
     <a-key key-class="tab break" char="Tab"></a-key>
     <a-key key-class="letter" char="a"></a-key>

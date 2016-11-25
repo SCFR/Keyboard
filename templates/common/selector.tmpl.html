@@ -1,35 +1,74 @@
 <div class="col-md-12">
-  <div class="legend">
-    <div class="col-lg-3 col-md-6">
-      <span class="lefty">Version : </span><span>
-        <select ng-model="currentVersion"  ng-show="!isEditMod" class="kVersion"  ng-options="v as v for (v,name) in selector.keyboards">
-        </select>
-        <input type="text"  ng-show="isEditMod" ng-model="newVersion" class="kVersion">
-      </span>
-      <br />
-      <span class="lefty">Clavier : </span><span>
-        <select ng-model="currentName" class="kName"  ng-show="!isEditMod"  ng-options="v as k.name for (v,k) in selector.keyboards[currentVersion]">
-        </select>
-        <input type="text" ng-model="newName"  ng-show="isEditMod" class="kName"  placeholder="Nom du nouveau clavier">
-      </span>
-    </div>
-    <div class="col-lg-3 col-md-6">
-      <span class="lefty">création : </span><span>{{ currentKeyboard.date_created | date:'dd/MM/yy' }}</span><br />
-      <span class="lefty">mise à jour : </span><span>{{ currentKeyboard.date_last_modified | date:'dd/MM/yy' }}</span><br />
-      <span class="lefty">modificateur{{currentKeyboard.modificatorCount > 1 ? 's' : ''}} : </span><span>{{ currentKeyboard.modificatorCount }}</span><br />
-      <span class="lefty">touche{{currentKeyboard.keyCount > 1 ? 's' : ''}}  : </span><span>{{ currentKeyboard.keyCount }}</span><br />
 
-    </div>
-    <div class="col-md-12">  <button type="button" ng-click="editMod(true)" ng-if="selector.isAdmin"  ng-show="!isEditMod"  data-toggle="tooltip" data-placement="top" title="Mode édition"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-      <button type="button" ng-click="copyKeyboard()"  ng-show="isEditMod" data-toggle="tooltip" data-placement="top" title="Copier clavier" ><i class="fa fa-clone" aria-hidden="true"></i></button>
-      <button type="button" ng-click="submitNewKeyboard()"  ng-show="isEditMod" data-toggle="tooltip" data-placement="top" title="Valider modifications"><i class="fa fa-check" aria-hidden="true"></i></button>
-      <button type="button" ng-click="editMod(false)"  ng-show="isEditMod" data-toggle="tooltip" data-placement="top" title="Annuler modifications"><i class="fa fa-ban" aria-hidden="true"></i></button>
-      <button type="button" class="delete" ng-click="deleteKeyboard()"  ng-show="isEditMod" data-toggle="tooltip" data-placement="top" title="Suprimer le clavier"><i class="fa fa-trash" aria-hidden="true"></i></button>
-    </div>
-    <div class="clear"></div>
-  </div>
+  <md-toolbar class="md-menu-toolbar">
+    <div layout="row" flex="100">
+      <md-toolbar-filler layout layout-align="center center">
+        <md-icon>menu</md-icon>
+      </md-toolbar-filler>
 
-  <div class="spinner" ng-show="busy">
-    <hub-loading-spinner></hub-loading-spinner>
-  </div>
+      <div flex="100">
+        <div layout="row" flex="100">
+          <md-button disabled> Crée le {{ currentKeyboard.date_created | date:'dd/MM/yy' }}</md-button>
+          <md-button disabled> Dernière mise à jour le {{ currentKeyboard.date_last_modified | date:'dd/MM/yy' }}</md-button>
+          <md-button disabled> # Modificateurs : {{ currentKeyboard.modificatorCount }}</md-button>
+          <md-button disabled> # Touches : {{ currentKeyboard.keyCount }}</md-button>
+        </div>
+        <div layout="row" flex="100">
+
+          <md-input-container flex="20" ng-show="!isEditMod">
+            <label>Version</label>
+            <md-select ng-model="currentVersion" class="md-no-underline">
+              <md-option ng-repeat="(name,version) in selector.keyboards" ng-value="name">
+                {{name}}
+              </md-option>
+            </md-select>
+          </md-input-container>
+
+          <md-input-container ng-show="isEditMod">
+            <label>Version</label>
+            <input type="text" ng-model="newVersion" class="kVersion">
+          </md-input-container>
+
+          <md-input-container flex="20"  ng-show="!isEditMod">
+            <label>Clavier</label>
+            <md-select ng-model="currentName" class="md-no-underline" flex>
+              <md-option ng-repeat="(name,v) in  selector.keyboards[currentVersion]" ng-value="name">
+                {{name}}
+              </md-option>
+            </md-select>
+          </md-input-container>
+
+          <md-input-container flex ng-show="isEditMod">
+            <label>Clavier</label>
+            <input type="text" ng-model="newName" class="kName" placeholder="Nom du nouveau clavier">
+          </md-input-container>
+        </div>
+
+
+        <div layout="row" flex="100" layout-align="end end">
+          <md-button class="md-icon-button" ng-click="editMod(true)" ng-if="selector.isAdmin" ng-show="!isEditMod">
+            <md-tooltip>Mode édition</md-tooltip>
+            <md-icon>mode_edit</md-icon>
+          </md-button>
+          <md-button class="md-icon-button" ng-click="copyKeyboard()" ng-show="isEditMod">
+            <md-tooltip>Copier clavier</md-tooltip>
+            <md-icon>content_copy</md-icon>
+          </md-button>
+          <md-button class="md-icon-button" ng-click="submitNewKeyboard()" ng-show="isEditMod">
+            <md-tooltip>Valider modifications</md-tooltip>
+            <md-icon>check</md-icon>
+          </md-button>
+          <md-button class="md-icon-button" ng-click="editMod(false)" ng-show="isEditMod">
+            <md-tooltip>Annuler modification</md-tooltip>
+            <md-icon>cancel</md-icon>
+          </md-button>
+          <md-button class="md-icon-button delete md-warn" ng-click="deleteKeyboard()" ng-show="isEditMod">
+            <md-tooltip>Suprimer le clavier</md-tooltip>
+            <md-icon>delete_forever</md-icon>
+          </md-button>
+        </div>
+      </div>
+    </div>
+  </md-toolbar>  
+  <md-progress-linear md-mode="indeterminate" ng-show="busy"></md-progress-linear>
 </div>

@@ -1,0 +1,7 @@
+  <md-list-item class="md-3-line" ng-click="null">
+    <span class="keyName">{{key.keyName}}</span>
+    <div>{{key.behavior.default}}</div>
+    <div ng-repeat="(mod, text) in key.behavior track by mod" ng-if="mod != 'default'">{{text}}</div>
+    
+    <md-button class="md-icon-button" data-as-sortable-item-handle><md-icon>drag_handle</md-icon></md-button>
+  </md-list-item>
