@@ -25,8 +25,6 @@ else {
 
     <a-keyboard></a-keyboard>
 
-    <a-keyboard-list></a-keyboard-list>
-
   </main>
 
 
