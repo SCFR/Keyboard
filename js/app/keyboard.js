@@ -447,7 +447,11 @@ app.controller('aSingleKey', ["$scope","$element","$timeout", function ($scope,e
     var modif = $scope.$parent.getKeyModifier($scope.char);
     $scope.isModifier = modif.is;
     $scope.modifierName = angular.copy(modif.name);
-    $scope.keyText = angular.copy($scope.$parent.getKey($scope.char)) || {0:null};
+    
+    var original = $scope.$parent.getKey($scope.char);
+    if(!original || original.length == 0) original = {default:null};
+
+    $scope.keyText = angular.copy(original);
   }
 
   init();

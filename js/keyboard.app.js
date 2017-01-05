@@ -214,9 +214,11 @@ String.prototype.isEmpty = function() {
     }), init = function() {
         delete a.keyText, a.modifierName = "", a.isModifier = !1;
         var b = a.$parent.getKeyModifier(a["char"]);
-        a.isModifier = b.is, a.modifierName = angular.copy(b.name), a.keyText = angular.copy(a.$parent.getKey(a["char"])) || {
-            0: null
-        };
+        a.isModifier = b.is, a.modifierName = angular.copy(b.name);
+        var c = a.$parent.getKey(a["char"]);
+        c && 0 != c.length || (c = {
+            "default": null
+        }), a.keyText = angular.copy(c);
     }, init(), a.escapize = a.$parent.escapize, a.toggleClick = function() {
         a.clicked = !a.clicked;
     }, a.$watch("isModifier", function(b) {
