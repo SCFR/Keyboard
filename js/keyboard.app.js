@@ -93,10 +93,10 @@ String.prototype.isEmpty = function() {
     a.selector = CURRENT_PAGE.model, a.isEditMod = !1, a.pressedLetter = !1, selectKeyboard = function(b) {
         delete a.currentKeyboard, a.currentKeyboard = angular.copy(b), a.currentKeyboard.keyboard_keys.modificators = a.currentKeyboard.keyboard_keys.modificators || {}, 
         a.currentKeyboard.keyboard_keys.keys = a.currentKeyboard.keyboard_keys.keys || {}, 
-        angular.forEach(a.currentKeyboard.keyboard_keys.keys, function(a, b) {
-            angular.forEach(a, function(b, c) {
-                "" == b && delete a[c];
-            }), a === {} && delete a;
+        angular.forEach(a.currentKeyboard.keyboard_keys.keys, function(b, c) {
+            angular.forEach(b, function(a, c) {
+                "" == a && delete b[c];
+            }), 0 == b.length && (a.currentKeyboard.keyboard_keys.keys[c] = {});
         }), a.currentVersion = b.version_id, a.currentName = b.name, a.newVersion = a.currentVersion, 
         a.newName = a.currentName, a.currentKeyboard.keyCount = Object.keys(a.currentKeyboard.keyboard_keys.keys).length, 
         a.currentKeyboard.modificatorCount = Object.keys(a.currentKeyboard.keyboard_keys.modificators).length, 

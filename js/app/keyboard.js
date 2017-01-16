@@ -53,8 +53,8 @@ app.controller('Keyboard.main', ["$scope", "SCFRKeyboardAPI","$document", functi
       angular.forEach(val, function(value, id) {
         if(value == "") delete val[id];
       });
-      if(val === {})
-      delete val;
+      if(val.length == 0) 
+        $scope.currentKeyboard.keyboard_keys.keys[key] = {};
     });
 
     $scope.currentVersion = keyboard.version_id;
